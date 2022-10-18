@@ -1,6 +1,6 @@
-# Sample Hardhat Project
+# Sample Solidity Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This project demonstrates a basic Blockchain use case. The project implements a simple twitter clone with basic functionality using solidity and deployed on the Ethereum testnet. 
 
 Try running some of the following tasks:
 
