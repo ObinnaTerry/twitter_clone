@@ -40,6 +40,16 @@ contract Twitter {
         counter++;
     }
 
+    function editTweet(uint index, string calldata newMessage) external {
+        require(index <= tweets.length, "Index out of range");
+
+        Tweet storage tweetToEdit = tweets[index];
+
+        require(tweetToEdit.isActive, "Cant modify inactive tweet");
+
+        tweetToEdit.tweet = newMessage;
+    }
+
     function getTweets() external view returns (Tweet [] memory){
         return tweets;
     }
