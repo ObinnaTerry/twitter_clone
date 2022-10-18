@@ -19,7 +19,7 @@ contract Twitter {
     }
     
     function remove(uint index)  external returns (Tweet [] memory) {
-        require(index <= tweets.length, "Index out of range");
+        require(index < tweets.length, "Index out of range");
 
         tweets[index].isActive = false;
         
