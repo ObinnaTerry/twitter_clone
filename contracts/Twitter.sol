@@ -17,7 +17,7 @@ contract Twitter {
 
     constructor() {
     }
-
+    
     function remove(uint index)  external returns (Tweet [] memory) {
         require(index <= tweets.length, "Index out of range");
 
@@ -26,6 +26,8 @@ contract Twitter {
         return tweets;
     }
 
+    //need to understand better the difference between memory and calldata keywords for input pameter and how it effects 
+    //performance and gas cost
     function addTweet(string memory message) external {
         
         tweets.push(Tweet({
