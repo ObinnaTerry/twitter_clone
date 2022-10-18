@@ -40,5 +40,9 @@ contract Twitter {
         counter++;
     }
 
+    function getTweets() external view returns (Tweet [] memory){
+        return tweets;
+    }
+
 }
 
