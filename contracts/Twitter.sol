@@ -25,5 +25,18 @@ contract Twitter {
         
         return tweets;
     }
+
+    function addTweet(string memory message) external {
+        
+        tweets.push(Tweet({
+            id: counter,
+            senderAddress: msg.sender,
+            tweet: message,
+            isActive: true
+        }));
+        
+        counter++;
+    }
+
 }
 
