@@ -20,6 +20,11 @@ contract Twitter {
     event DeleteTweet(uint256 index, bool status);
     event EditTweet(uint256 index, string newTweet);
 
+    /// @notice The tweet does not belong to you
+    error UnauthorizedAccess();
+    /// @notice The tweet is already deleted
+    error DeletedTweet();
+
     constructor() {
         counter = 1;
     }
