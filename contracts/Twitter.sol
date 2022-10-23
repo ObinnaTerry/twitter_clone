@@ -57,11 +57,19 @@ contract Twitter {
 
         Tweet storage tweetToEdit = tweets[index];
 
-        require(msg.sender == tweetToEdit.senderAddress, "Cant only edit your own tweets");
+        //Ensures only tweet owners can edit tweets
+        if (msg.sender != tweetToEdit.senderAddress){
+            revert UnauthorizedAccess();
+        }
 
-        require(tweetToEdit.isActive, "Cant modify deleted tweet");
+        //Ensures onluy active tweets can be deleted
+        if (!tweetToEdit.isActive){
+            revert DeletedTweet();
+        }
 
         tweetToEdit.tweet = newMessage;
+
+        emit EditTweet(index, newMessage);
     }
 
     function getTweets() external view returns (Tweet [] memory){
