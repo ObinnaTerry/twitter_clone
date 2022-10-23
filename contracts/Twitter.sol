@@ -5,17 +5,23 @@ pragma solidity ^0.8.17;
 contract Twitter {
 
     struct Tweet{
-        uint id;
+        uint256 id;
+        uint256 tweetTime;
         address senderAddress;
         string tweet;
         bool isActive;
     }
 
-    uint counter;
+    uint256 counter;
 
     Tweet[] public tweets;
 
+    event NewTweet(uint256 index, uint256 tweetTime);
+    event DeleteTweet(uint256 index, bool status);
+    event EditTweet(uint256 index, string newTweet);
+
     constructor() {
+        counter = 1;
     }
     
     function remove(uint index)  external returns (Tweet [] memory) {
@@ -32,6 +38,7 @@ contract Twitter {
         
         tweets.push(Tweet({
             id: counter,
+            tweetTime: block.timestamp,
             senderAddress: msg.sender,
             tweet: message,
             isActive: true
@@ -45,7 +52,9 @@ contract Twitter {
 
         Tweet storage tweetToEdit = tweets[index];
 
-        require(tweetToEdit.isActive, "Cant modify inactive tweet");
+        require(msg.sender == tweetToEdit.senderAddress, "Cant only edit your own tweets");
+
+        require(tweetToEdit.isActive, "Cant modify deleted tweet");
 
         tweetToEdit.tweet = newMessage;
     }
