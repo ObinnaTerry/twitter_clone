@@ -1,4 +1,4 @@
-# Sample Solidity Project
+# Simple Twitter Clone Solidity Project
 
 This project demonstrates a basic Blockchain use case. The project implements a simple twitter clone with basic functionality using solidity and deployed on the Ethereum testnet. 
 
