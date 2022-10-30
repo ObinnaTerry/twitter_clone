@@ -12,11 +12,13 @@ contract Twitter {
         bool isActive;
     }
 
-    uint256 counter;
+    uint256 totalTweetsCounter;
+    uint256 deletedTweetsCounter;
 
-    Tweet[] public tweets;
+    mapping(uint256 => Tweet) public tweets;
+    //Tweet[] public tweets;
 
-    event NewTweet(uint256 index, uint256 tweetTime);
+    event NewTweet(uint256 index);
     event DeleteTweet(uint256 index, bool status);
     event EditTweet(uint256 index, string newTweet);
 
@@ -24,36 +26,55 @@ contract Twitter {
     error UnauthorizedAccess();
     /// @notice The tweet is already deleted
     error DeletedTweet();
+    /// @notice Provided id does not exist
+    error IdError();
 
     constructor() {
-        counter = 1;
+        totalTweetsCounter = 0;
+        deletedTweetsCounter = 0;
     }
     
-    function remove(uint index)  external returns (Tweet [] memory) {
-        require(index < tweets.length, "Index out of range");
+    function remove(uint index)  external {
 
-        tweets[index].isActive = false;
+        Tweet storage tweetToDelete = tweets[index];
+
+        if (tweetToDelete.senderAddress == address(0)){
+            revert IdError();
+        }
+
+        if (!tweetToDelete.isActive){
+            revert DeletedTweet();
+        }
+
+        tweetToDelete.isActive = false;
+
+        deletedTweetsCounter++;
         
-        return tweets;
+        emit DeleteTweet(index, false);
     }
 
     //need to understand better the difference between memory and calldata keywords for input pameter and how it effects 
     //performance and gas cost
     function addTweet(string memory message) external {
         
-        tweets.push(Tweet({
-            id: counter,
+        tweets[totalTweetsCounter] = Tweet({
+            id: totalTweetsCounter,
             tweetTime: block.timestamp,
             senderAddress: msg.sender,
             tweet: message,
             isActive: true
-        }));
+        });
         
-        counter++;
+        totalTweetsCounter++;
+
+        emit NewTweet(totalTweetsCounter);
     }
 
     function editTweet(uint index, string calldata newMessage) external {
-        require(index <= tweets.length, "Index out of range");
+
+         if(tweets[index].id == 0){
+            revert IdError();
+        }
 
         Tweet storage tweetToEdit = tweets[index];
 
@@ -73,7 +94,18 @@ contract Twitter {
     }
 
     function getTweets() external view returns (Tweet [] memory){
-        return tweets;
+
+        Tweet[] memory allActiveTweets = new Tweet[](totalTweetsCounter-deletedTweetsCounter);
+        uint256 indexTracker = 0;
+
+         for (uint256 i = 0; i < totalTweetsCounter; i++) {
+            if (tweets[i].isActive){
+                allActiveTweets[indexTracker] = tweets[i];
+                indexTracker++;
+            }
+        }
+
+        return allActiveTweets;
     }
 
 }
