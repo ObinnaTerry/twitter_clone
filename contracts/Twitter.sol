@@ -76,7 +76,9 @@ contract Twitter {
 
     function editTweet(uint index, string calldata newMessage) external {
 
-         if(tweets[index].senderAddress == address(0)){
+        if (bytes(newMessage).length > 280) revert InvalidMessage();
+
+        if(tweets[index].senderAddress == address(0)){
             revert IdError();
         }
 
