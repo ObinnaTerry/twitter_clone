@@ -118,5 +118,9 @@ contract Twitter {
         return allActiveTweets;
     }
 
+    function getValidTweetsLength() external view returns (uint256){
+        return totalTweetsCounter - deletedTweetsCounter;
+    }
+
 }
 
