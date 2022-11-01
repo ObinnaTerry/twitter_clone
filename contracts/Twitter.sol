@@ -28,6 +28,8 @@ contract Twitter {
     error DeletedTweet();
     /// @notice Provided id does not exist
     error IdError();
+    /// @notice Tweet exceeds allowed max length
+    error InvalidMessage();
 
     constructor() {
         totalTweetsCounter = 0;
@@ -56,7 +58,9 @@ contract Twitter {
     //need to understand better the difference between memory and calldata keywords for input pameter and how it effects 
     //performance and gas cost
     function addTweet(string memory message) external {
-        
+
+        if (bytes(message).length > 280) revert InvalidMessage();
+
         tweets[totalTweetsCounter] = Tweet({
             id: totalTweetsCounter,
             tweetTime: block.timestamp,
