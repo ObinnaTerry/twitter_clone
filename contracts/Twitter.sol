@@ -44,6 +44,10 @@ contract Twitter {
             revert IdError();
         }
 
+        if (msg.sender != tweetToDelete.senderAddress){
+            revert UnauthorizedAccess();
+        }
+
         if (!tweetToDelete.isActive){
             revert DeletedTweet();
         }
