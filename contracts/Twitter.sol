@@ -2,6 +2,8 @@
 pragma solidity ^0.8.17;
 
 
+/// @title A twitter clone project for the blockchain class 
+/// @author Obinna Donatus
 contract Twitter {
 
     struct Tweet{
@@ -16,7 +18,6 @@ contract Twitter {
     uint256 deletedTweetsCounter;
 
     mapping(uint256 => Tweet) public tweets;
-    //Tweet[] public tweets;
 
     event NewTweet(uint256 index);
     event DeleteTweet(uint256 index, bool status);
@@ -31,11 +32,15 @@ contract Twitter {
     /// @notice Tweet exceeds allowed max length
     error InvalidMessage();
 
+
     constructor() {
         totalTweetsCounter = 0;
         deletedTweetsCounter = 0;
     }
     
+    /// @notice Remove a tweet from the map
+    /// @dev This function does not delete tweet but only changes the flag. This is done to reduce computation and save gas
+    /// @param index The index of the tweet to be deleted
     function remove(uint index)  external {
 
         Tweet storage tweetToDelete = tweets[index];
@@ -59,8 +64,9 @@ contract Twitter {
         emit DeleteTweet(index, false);
     }
 
-    //need to understand better the difference between memory and calldata keywords for input pameter and how it effects 
-    //performance and gas cost
+    /// @notice Add a new tweet to the map
+    /// @dev Map index starts from 0
+    /// @param message The message associated with the new tweet. Message can't be more than 280 characters
     function addTweet(string memory message) external {
 
         if (bytes(message).length > 280) revert InvalidMessage();
@@ -78,6 +84,9 @@ contract Twitter {
         emit NewTweet(totalTweetsCounter);
     }
 
+    /// @notice Edit an existing tweet
+    /// @param index The index of the tweet to be modified
+    /// @param newMessage The new message to replace the existing message
     function editTweet(uint index, string calldata newMessage) external {
 
         if (bytes(newMessage).length > 280) revert InvalidMessage();
@@ -103,6 +112,8 @@ contract Twitter {
         emit EditTweet(index, newMessage);
     }
 
+    /// @notice Get all none deleted tweet from the map
+    /// @return Tweet A list of all none deleted tweets
     function getTweets() external view returns (Tweet [] memory){
 
         Tweet[] memory allActiveTweets = new Tweet[](totalTweetsCounter-deletedTweetsCounter);
@@ -118,6 +129,8 @@ contract Twitter {
         return allActiveTweets;
     }
 
+    /// @notice Gets the total number of none deleted tweets
+    /// @return uint256 
     function getValidTweetsLength() external view returns (uint256){
         return totalTweetsCounter - deletedTweetsCounter;
     }
