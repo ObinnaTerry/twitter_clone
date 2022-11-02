@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (min-width: 1024px) {
+    .row {
+        -webkit-box-direction: normal;
+        -webkit-box-orient: horizontal;
+        flex-direction: row;
+    }
+}
+
+@layer components {
+    body {
+        @apply bg-gray-900 text-white
+    }
+
+    .base {
+        -ms-flex-align: stretch;
+        -ms-flex-direction: column;
+        -ms-flex-negative: 0;
+        -ms-flex-preferred-size: auto;
+        -webkit-align-items: stretch;
+        -webkit-box-align: stretch;
+        -webkit-box-direction: normal;
+        -webkit-box-orient: vertical;
+        -webkit-flex-basis: auto;
+        -webkit-flex-direction: column;
+        -webkit-flex-shrink: 0;
+        align-items: stretch;
+        border: 0 solid black;
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        flex-basis: auto;
+        flex-direction: column;
+        flex-shrink: 0;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        min-height: 0px;
+        min-width: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        position: relative;
+        z-index: 0;
+    }
+
+    .base-text {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow-wrap: normal;
+    }
+}
