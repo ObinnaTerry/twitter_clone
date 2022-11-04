@@ -4,6 +4,7 @@ pragma solidity ^0.8.17;
 
 /// @title A twitter clone project for the blockchain class 
 /// @author Obinna Donatus
+/// @author Bernard Polidario
 contract Twitter {
 
     struct Tweet{
