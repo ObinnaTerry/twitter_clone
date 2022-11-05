@@ -6,6 +6,7 @@ pragma solidity ^0.8.17;
 /// @author Obinna Donatus
 /// @author Bernard Polidario
 /// @author Ronnel Martinez
+/// @author Sanjana Raparthi
 contract Twitter {
 
     struct Tweet{
