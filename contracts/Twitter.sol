@@ -44,7 +44,7 @@ contract Twitter {
     /// @notice Remove a tweet from the map
     /// @dev This function does not delete tweet but only changes the flag. This is done to reduce computation and save gas
     /// @param index The index of the tweet to be deleted
-    function remove(uint index)  external {
+    function remove(uint256 index)  external {
 
         Tweet storage tweetToDelete = tweets[index];
 
@@ -90,7 +90,7 @@ contract Twitter {
     /// @notice Edit an existing tweet
     /// @param index The index of the tweet to be modified
     /// @param newMessage The new message to replace the existing message
-    function editTweet(uint index, string calldata newMessage) external {
+    function editTweet(uint256 index, string calldata newMessage) external {
 
         if (bytes(newMessage).length > 280) revert InvalidMessage();
 
