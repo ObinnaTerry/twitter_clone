@@ -115,6 +115,4 @@ describe("Twitter contract", function () {
         })
     
   })
-
-
 })
