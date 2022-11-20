@@ -22,7 +22,7 @@ contract Twitter {
     uint256 totalTweetsCounter;
     uint256 deletedTweetsCounter;
 
-    mapping(uint256 => Tweet) public tweets;
+    mapping(uint256 => Tweet) tweets;
     mapping(uint256 => address[]) likesMapping;
 
     event NewTweet(uint256 index);
