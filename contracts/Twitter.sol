@@ -102,14 +102,15 @@ contract Twitter {
             revert IdError();
         }
 
+        Tweet storage tweetToEdit = tweets[index];
+        if(!tweetToEdit.isActive) revert DeletedTweet();
+
         address[] storage likedTweetAdds = likesMapping[index];
 
          for (uint i = 0; i < likedTweetAdds.length; i++) {
             if (likedTweetAdds[i] == msg.sender) revert LikeTweetError();
         }
 
-        Tweet storage tweetToEdit = tweets[index];
-        if(!tweetToEdit.isActive) revert LikeTweetError();
         tweetToEdit.likes += 1;
         likedTweetAdds.push(msg.sender);
 
