@@ -96,7 +96,7 @@ contract Twitter {
 
     /// @notice Add a new tweet to the map
     /// @param index index of tweet to be likes
-    function likeTweet(uint256 index, address add) external{
+    function likeTweet(uint256 index) external{
 
         if(tweets[index].senderAddress == address(0)){
             revert IdError();
@@ -105,14 +105,14 @@ contract Twitter {
         address[] storage likedTweetAdds = likesMapping[index];
 
          for (uint i = 0; i < likedTweetAdds.length; i++) {
-            if (likedTweetAdds[i] == add) {
+            if (likedTweetAdds[i] == msg.sender) {
                 revert LikeTweetError();
             }
         }
 
         Tweet storage tweetToEdit = tweets[index];
         tweetToEdit.likes += 1;
-        likedTweetAdds.push(add);
+        likedTweetAdds.push(msg.sender);
 
         emit LikeTweet(index, tweetToEdit.likes);
     }
