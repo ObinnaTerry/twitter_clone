@@ -94,7 +94,7 @@ contract Twitter {
         emit NewTweet(totalTweetsCounter);
     }
 
-    /// @notice Add a new tweet to the map
+    /// @notice Permits valid tweets to be liked
     /// @param index index of tweet to be likes
     function likeTweet(uint256 index) external{
 
