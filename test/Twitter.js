@@ -38,26 +38,26 @@ describe("Twitter contract", function () {
     it("Should allow tweet owner to like own tweets", async function () {
       const { twitter, owner } = await loadFixture(twitterFixture)
       await twitter.connect(owner).addTweet("Test message")
-      await expect(twitter.connect(owner).likeTweet(0, owner.address)).to.emit(twitter, "LikeTweet")
+      await expect(twitter.connect(owner).likeTweet(0)).to.emit(twitter, "LikeTweet")
     })
 
     it("Should allow others to like tweets", async function () {
       const { twitter, owner, accounts } = await loadFixture(twitterFixture)
       await twitter.connect(owner).addTweet("Test message")
-      await expect(twitter.connect(accounts[1]).likeTweet(0, accounts[1].address)).to.emit(twitter, "LikeTweet")
+      await expect(twitter.connect(accounts[1]).likeTweet(0)).to.emit(twitter, "LikeTweet")
     })
 
     it("Should allow only one like per address", async function () {
       const { twitter, owner, accounts } = await loadFixture(twitterFixture)
       await twitter.connect(owner).addTweet("Test message")
-      await twitter.connect(accounts[1]).likeTweet(0, accounts[1].address)
-      await expect(twitter.connect(accounts[1]).likeTweet(0, accounts[1].address)).to.be.revertedWithCustomError(twitter, "LikeTweetError")
+      await twitter.connect(accounts[1]).likeTweet(0)
+      await expect(twitter.connect(accounts[1]).likeTweet(0)).to.be.revertedWithCustomError(twitter, "LikeTweetError")
     })
 
     it("Should only like valid tweets", async function () {
       const { twitter, owner, accounts } = await loadFixture(twitterFixture)
       await twitter.connect(owner).addTweet("Test message")
-      await expect(twitter.connect(accounts[1]).likeTweet(1, accounts[1].address)).to.be.revertedWithCustomError(twitter, "IdError")
+      await expect(twitter.connect(accounts[1]).likeTweet(1)).to.be.revertedWithCustomError(twitter, "IdError")
     })
   
   })
