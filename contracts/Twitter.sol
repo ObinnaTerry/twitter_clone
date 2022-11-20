@@ -15,16 +15,20 @@ contract Twitter {
         address senderAddress;
         string tweet;
         bool isActive;
+        uint256 likes;
+        //address[] likeAddress;
     }
 
     uint256 totalTweetsCounter;
     uint256 deletedTweetsCounter;
 
     mapping(uint256 => Tweet) public tweets;
+    mapping(uint256 => address[]) likesMapping;
 
     event NewTweet(uint256 index);
     event DeleteTweet(uint256 index, bool status);
     event EditTweet(uint256 index, string newTweet);
+    event LikeTweet(uint256 index, uint256 likes);
 
     /// @notice The tweet does not belong to you
     error UnauthorizedAccess();
@@ -34,6 +38,8 @@ contract Twitter {
     error IdError();
     /// @notice Tweet exceeds allowed max length
     error InvalidMessage();
+    /// @notice Can not like tweet more than once
+    error LikeTweetError();
 
 
     constructor() {
@@ -79,12 +85,34 @@ contract Twitter {
             tweetTime: block.timestamp,
             senderAddress: msg.sender,
             tweet: message,
-            isActive: true
+            isActive: true,
+            likes: 0
         });
         
         totalTweetsCounter++;
 
         emit NewTweet(totalTweetsCounter);
+    }
+
+    function likeTweet(uint256 index, address add) external{
+
+        if(tweets[index].senderAddress == address(0)){
+            revert IdError();
+        }
+
+        address[] storage likedTweetAdds = likesMapping[index];
+
+         for (uint i = 0; i < likedTweetAdds.length; i++) {
+            if (likedTweetAdds[i] == add) {
+                revert LikeTweetError();
+            }
+        }
+
+        Tweet storage tweetToEdit = tweets[index];
+        tweetToEdit.likes += 1;
+        likedTweetAdds.push(add);
+
+        emit LikeTweet(index, tweetToEdit.likes);
     }
 
     /// @notice Edit an existing tweet
