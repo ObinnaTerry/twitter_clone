@@ -94,6 +94,8 @@ contract Twitter {
         emit NewTweet(totalTweetsCounter);
     }
 
+    /// @notice Add a new tweet to the map
+    /// @param index index of tweet to be likes
     function likeTweet(uint256 index, address add) external{
 
         if(tweets[index].senderAddress == address(0)){
