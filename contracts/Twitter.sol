@@ -16,7 +16,6 @@ contract Twitter {
         string tweet;
         bool isActive;
         uint256 likes;
-        //address[] likeAddress;
     }
 
     uint256 totalTweetsCounter;
@@ -40,6 +39,8 @@ contract Twitter {
     error InvalidMessage();
     /// @notice Can not like tweet more than once
     error LikeTweetError();
+    /// @notice Encoutered error. Can only unlike previously liked tweet once
+    error UnlikeTweetError();
 
 
     constructor() {
@@ -115,6 +116,31 @@ contract Twitter {
         likedTweetAdds.push(msg.sender);
 
         emit LikeTweet(index, tweetToEdit.likes);
+    }
+
+    function unlikeTweet(uint256 index) external {
+
+        if(tweets[index].senderAddress == address(0)){
+            revert IdError();
+        }
+
+        Tweet storage tweetToEdit = tweets[index];
+        if(!tweetToEdit.isActive) revert DeletedTweet();
+
+        address[] storage likedTweetAdds = likesMapping[index];
+
+         for (uint i = 0; i < likedTweetAdds.length; i++) {
+            if (likedTweetAdds[i] == msg.sender) {
+                likedTweetAdds[i] = address(0);
+                tweetToEdit.likes -= 1;
+
+                emit LikeTweet(index, tweetToEdit.likes);
+
+                return;
+            }
+        }
+
+        revert UnlikeTweetError();
     }
 
     /// @notice Edit an existing tweet
