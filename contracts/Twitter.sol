@@ -96,7 +96,7 @@ contract Twitter {
     }
 
     /// @notice Permits valid tweets to be liked
-    /// @param index index of tweet to be likes
+    /// @param index index of tweet to be liked
     function likeTweet(uint256 index) external{
 
         if(tweets[index].senderAddress == address(0)){
@@ -118,6 +118,8 @@ contract Twitter {
         emit LikeTweet(index, tweetToEdit.likes);
     }
 
+    /// @notice Allows tweets to be unliked if user previously liked same tweet
+    /// @param index index of tweet to be unliked
     function unlikeTweet(uint256 index) external {
 
         if(tweets[index].senderAddress == address(0)){
