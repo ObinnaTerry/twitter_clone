@@ -4,10 +4,14 @@ This project demonstrates a basic Blockchain use case. The project implements a 
 
 Try running some of the following tasks:
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+
+use `npx hardhat help` for help
+use `npx hardhat test` to execute the test script. 
+
+To deploy contract locally, its required to create a local Ethereum network by starting a local node.
+To start a local node, run `npx hardhat node`
+
+After the local node has been successfully started, execute `npx hardhat run scripts/deploy.js --network localhost`
+This should deploy the contract locally. 
+
+visit https://hardhat.org/ for more information on Hardhat
