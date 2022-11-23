@@ -2,8 +2,6 @@
 
 This project demonstrates a basic Blockchain use case. The project implements a simple twitter clone with basic functionality using solidity and deployed on the Ethereum Goerli testnet. 
 
-Try running some of the following tasks:
-
 
 use `npx hardhat help` for help
 use `npx hardhat test` to execute the test script. 
