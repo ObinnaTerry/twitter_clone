@@ -41,6 +41,13 @@ describe("Twitter contract", function () {
       await expect(twitter.connect(owner).likeTweet(0)).to.emit(twitter, "LikeTweet")
     })
 
+    it("Should allow like for only active tweet", async function () {
+      const { twitter, owner, accounts } = await loadFixture(twitterFixture)
+      await twitter.connect(owner).addTweet("Test message")
+      await twitter.connect(owner).remove(0)
+      await expect(twitter.connect(accounts[1]).likeTweet(0)).to.be.revertedWithCustomError(twitter, "DeletedTweet")
+    })
+
     it("Should allow others to like tweets", async function () {
       const { twitter, owner, accounts } = await loadFixture(twitterFixture)
       await twitter.connect(owner).addTweet("Test message")
@@ -58,6 +65,36 @@ describe("Twitter contract", function () {
       const { twitter, owner, accounts } = await loadFixture(twitterFixture)
       await twitter.connect(owner).addTweet("Test message")
       await expect(twitter.connect(accounts[1]).likeTweet(1)).to.be.revertedWithCustomError(twitter, "IdError")
+    })
+  
+  })
+
+  describe("Unlike tweets", function () {
+    it("Should fail if account didnt previously like tweet", async function () {
+      const { twitter, owner, accounts } = await loadFixture(twitterFixture)
+      await twitter.connect(owner).addTweet("Test message")
+      await expect(twitter.connect(accounts[1]).unlikeTweet(0)).to.be.revertedWithCustomError(twitter, "UnlikeTweetError")
+    })
+
+    it("Should allow only one unlike", async function () {
+      const { twitter, owner, accounts } = await loadFixture(twitterFixture)
+      await twitter.connect(owner).addTweet("Test message")
+      await twitter.connect(accounts[1]).likeTweet(0)
+      await twitter.connect(accounts[1]).unlikeTweet(0)
+      await expect(twitter.connect(accounts[1]).unlikeTweet(0)).to.be.revertedWithCustomError(twitter, "UnlikeTweetError")
+    })
+
+    it("Should allow unlike for only active tweet", async function () {
+      const { twitter, owner, accounts } = await loadFixture(twitterFixture)
+      await twitter.connect(owner).addTweet("Test message")
+      await twitter.connect(owner).remove(0)
+      await expect(twitter.connect(accounts[1]).unlikeTweet(0)).to.be.revertedWithCustomError(twitter, "DeletedTweet")
+    })
+
+    it("Should only unlike valid tweets", async function () {
+      const { twitter, owner, accounts } = await loadFixture(twitterFixture)
+      await twitter.connect(owner).addTweet("Test message")
+      await expect(twitter.connect(accounts[1]).unlikeTweet(1)).to.be.revertedWithCustomError(twitter, "IdError")
     })
   
   })
