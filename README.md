@@ -5,7 +5,7 @@ This project demonstrates a basic Blockchain use case. The project implements a 
 Try running some of the following tasks:
 
 ```shell
-use <code>npx hardhat help<code> to run execute the test
+npx hardhat help
 npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
