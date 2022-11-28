@@ -31,6 +31,11 @@ describe("Twitter contract", function () {
       const { twitter, owner } = await loadFixture(twitterFixture)
       await expect(twitter.connect(owner).addTweet("Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesuada. Sed vel lectus. Donec odio urna, tempus molestie, porttitor ut, iaculis quis, sem. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum tortor id mi. Pellentesque ipsum. Nul")).to.be.revertedWithCustomError(twitter, "InvalidMessage")
     })
+
+    it("Should not allow empty tweet", async function () {
+      const { twitter, owner } = await loadFixture(twitterFixture)
+      await expect(twitter.connect(owner).addTweet("")).to.be.revertedWithCustomError(twitter, "InvalidMessage")
+    })
   
   })
 
@@ -129,6 +134,12 @@ describe("Twitter contract", function () {
       const { twitter, owner } = await loadFixture(twitterFixture)
       await twitter.connect(owner).addTweet("Test message")
       await expect(twitter.editTweet(0, "Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesuada. Sed vel lectus. Donec odio urna, tempus molestie, porttitor ut, iaculis quis, sem. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum tortor id mi. Pellentesque ipsum. Nul")).to.be.revertedWithCustomError(twitter, "InvalidMessage")
+    })
+
+    it("Should not allow edit with empty tweet", async function () {
+      const { twitter, owner } = await loadFixture(twitterFixture)
+      await twitter.connect(owner).addTweet("Test message")
+      await expect(twitter.editTweet(0, "")).to.be.revertedWithCustomError(twitter, "InvalidMessage")
     })
   })
 
