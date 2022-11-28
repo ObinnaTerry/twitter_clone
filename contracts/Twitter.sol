@@ -80,6 +80,7 @@ contract Twitter {
     function addTweet(string memory message) external {
 
         if (bytes(message).length > 280) revert InvalidMessage();
+        if (bytes(message).length < 1) revert InvalidMessage();
 
         tweets[totalTweetsCounter] = Tweet({
             id: totalTweetsCounter,
@@ -151,6 +152,7 @@ contract Twitter {
     function editTweet(uint256 index, string calldata newMessage) external {
 
         if (bytes(newMessage).length > 280) revert InvalidMessage();
+        if (bytes(newMessage).length < 1) revert InvalidMessage();
 
         if(tweets[index].senderAddress == address(0)){
             revert IdError();
