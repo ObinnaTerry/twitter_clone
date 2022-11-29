@@ -192,6 +192,14 @@ contract Twitter {
         return allActiveTweets;
     }
 
+    /// @notice Gets tweet like addresses by index
+    /// @param index Index of the target tweet
+    function getLikes(uint256 index) external view returns (address [] memory){
+        address[] storage likedTweetAdds = likesMapping[index];
+
+        return likedTweetAdds;
+    }
+
     /// @notice Gets the total number of none deleted tweets
     /// @return uint256 
     function getValidTweetsLength() external view returns (uint256){
