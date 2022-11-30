@@ -1,5 +1,5 @@
 # Simple Twitter Clone Solidity Project
-A solidity based blockchain basic twitter app. The project is developed using Hardhat which is an Ethereum development library based on Javascript. The project implements a simple twitter clone with basic functionality using solidity and deployed on the Ethereum Goerli testnet.
+A solidity based blockchain basic twitter app. The project is developed using the Solidity language and Hardhat which is an Ethereum development library based on Javascript. The project implements a simple twitter clone with basic functionality using solidity and deployed on the Ethereum Goerli testnet.
 
 ## Motivation
 This project is in fulfilment of the Blockchain course at Epita. The project aims to help students understand the basics of blockchains, its use cases as well as the constraints of developing on the blockchain especially the Ethereum POS chain. 
