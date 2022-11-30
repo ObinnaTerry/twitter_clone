@@ -43,13 +43,20 @@ In order to deploy to Goerli, we need test ethers. You can grab some test ETH fo
 
 You will need an RPC URL for the app. If you dont have one, create one with providers such as https://www.quicknode.com/ or https://www.alchemy.com/.
 
-Use a `.env` file for the RPC URL and your private key. Use ```bash npm install --save dotenv``` to install `.env` if not present. 
+Use a `.env` file for the RPC URL and your private key. Use 
+```bash 
+npm install --save dotenv
+``` 
+to install `.env` if not present. 
 <b>NEVER EXPOSE YOUR PRIVATE KEY OR YOU WILL LOSE ALL YOUR FUND!!!</b>
 
 The `hardhat.config.js` file has already been configured for Goerli testnet. 
 In the `.env` file, provide the key-value pairs for `STAGING_QUICKNODE_KEY` and `PRIVATE_KEY`
 
-run ```bash npx hardhat run scripts/deploy.js --network goerli``` to deploy the app to the Goerli testnet. 
+To deploy the app to the Goerli testnet. run 
+```bash
+npx hardhat run scripts/deploy.js --network goerli
+``` 
 
 Remember to note the deployed contract address for further interactions with the contract. 
 
