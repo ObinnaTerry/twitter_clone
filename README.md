@@ -19,9 +19,13 @@ Use https://hardhat.org/tutorial for the official documentation on installing Ha
 
 ### Run Tests
 The test provides a good coverage of the functions. 
-```npx hardhat test```
+```bash
+npx hardhat test
+```
 or 
-```npm test```
+```bash
+npm test
+```
 
 ### Deploy Locally
 To deploy contract locally, its required to create a local Ethereum network by starting a local node.
