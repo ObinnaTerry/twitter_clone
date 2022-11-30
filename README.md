@@ -18,7 +18,7 @@ To successfully run the project, the host machine must be running a Node.js vers
 Use https://hardhat.org/tutorial for the official documentation on installing Hardhat and Node.js
 
 ### Run Tests
-The test provides a good coverage of the functions. 
+The test provides a good coverage of the functions. Use:
 ```bash
 npx hardhat test
 ```
@@ -30,10 +30,12 @@ npm test
 ### Deploy Locally
 To deploy contract locally, its required to create a local Ethereum network by starting a local node.
 To start a local node run:
-```npx hardhat node```
+```bash
+npx hardhat node
+```
 This will start a local instance of the Ethereum network. Do not close the shell where the above command is run. closing the shell will stop the local Ethereum instance. Use a different shell to execute other commands.
 
-After the local node has been successfully started, execute `npx hardhat run scripts/deploy.js --network localhost` on a new shell.
+After the local node has been successfully started, execute ```bash npx hardhat run scripts/deploy.js --network localhost``` on a new shell.
 This should deploy the contract locally. 
 
 ### Deploy on Goerli TestNet
@@ -41,13 +43,13 @@ In order to deploy to Goerli, we need test ethers. You can grab some test ETH fo
 
 You will need an RPC URL for the app. If you dont have one, create one with providers such as https://www.quicknode.com/ or https://www.alchemy.com/.
 
-Use a `.env` file for the RPC URL and your private key. Use ```npm install --save dotenv``` to install `.env` if not present. 
+Use a `.env` file for the RPC URL and your private key. Use ```bash npm install --save dotenv``` to install `.env` if not present. 
 <b>NEVER EXPOSE YOUR PRIVATE KEY OR YOU WILL LOSE ALL YOUR FUND!!!</b>
 
 The `hardhat.config.js` file has already been configured for Goerli testnet. 
 In the `.env` file, provide the key-value pairs for `STAGING_QUICKNODE_KEY` and `PRIVATE_KEY`
 
-run ```npx hardhat run scripts/deploy.js --network goerli``` to deploy the app to the Goerli testnet. 
+run ```bash npx hardhat run scripts/deploy.js --network goerli``` to deploy the app to the Goerli testnet. 
 
 Remember to note the deployed contract address for further interactions with the contract. 
 
