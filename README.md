@@ -4,7 +4,7 @@ A solidity based blockchain basic twitter app. The project is developed using th
 ## Motivation
 This project is in fulfilment of the Blockchain course at Epita. The project aims to help students understand the basics of blockchains, its use cases as well as the constraints of developing on the blockchain especially the Ethereum POS chain. 
 This project demonstrates a basic Blockchain use case. The project implements a simple twitter clone with basic functionality using solidity and deployed on the Ethereum Goerli testnet. 
-Together we can take crypto to the moon :rocket:
+<p>Together we can take crypto to the moon :rocket:</p>
 
 ## Features
 * Create tweet
