@@ -10,7 +10,7 @@ This project demonstrates a basic Blockchain use case. The project implements a 
 * Create tweet
 * Edit tweet
 * Delete tweet
-* Read twet
+* Read tweet
 * Like tweet
 * Unlike tweet
 
