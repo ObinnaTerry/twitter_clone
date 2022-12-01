@@ -3,7 +3,7 @@ A solidity based blockchain basic twitter app. The project is developed using th
 
 ## Motivation
 This project is in fulfilment of the Blockchain course at Epita. The project aims to help students understand the basics of blockchains, its use cases as well as the constraints of developing on the blockchain especially the Ethereum POS chain. 
-This project demonstrates a basic Blockchain use case. The project implements a simple twitter clone with basic functionality using solidity and deployed on the Ethereum Goerli testnet. 
+This project demonstrates a basic Blockchain use case. 
 <p>Together we can take crypto to the moon :rocket:</p>
 
 ## Features
@@ -36,7 +36,10 @@ npx hardhat node
 ```
 This will start a local instance of the Ethereum network. Do not close the shell where the above command is run. closing the shell will stop the local Ethereum instance. Use a different shell to execute other commands.
 
-After the local node has been successfully started, execute ```bash npx hardhat run scripts/deploy.js --network localhost``` on a new shell.
+After the local node has been successfully started, on a new shell, execute 
+```bash 
+npx hardhat run scripts/deploy.js --network localhost
+```
 This should deploy the contract locally. 
 
 ### Deploy on Goerli TestNet
